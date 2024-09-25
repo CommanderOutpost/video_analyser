@@ -29,9 +29,7 @@ cd backend/yolo_files
 
 # Download YOLO configuration files and weights
 wget https://pjreddie.com/media/files/yolov3.weights
-wget https://pjreddie.com/media/files/yolov3-tiny.weights
 wget https://pjreddie.com/media/files/yolov3.cfg
-wget https://pjreddie.com/media/files/yolov3-tiny.cfg
 
 # Download COCO names
 wget https://pjreddie.com/media/files/coco.names
