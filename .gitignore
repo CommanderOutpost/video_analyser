@@ -1,0 +1,4 @@
+backend/static/
+backend/__pycache__*
+backend/yolo_files
+backend/backend_env
