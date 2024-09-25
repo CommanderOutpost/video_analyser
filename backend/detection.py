@@ -48,7 +48,6 @@ def detect_objects(frame, yolo_net, output_layers):
 
 
 # Function to process the video and generate the output video and JSON
-# Function to process the video and generate the output video and JSON
 def process_video(input_video_path, output_video_path, output_json_path, skip_frames=2):
     cap = cv2.VideoCapture(input_video_path)
     frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
