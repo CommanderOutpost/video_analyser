@@ -127,7 +127,3 @@ def process_video(input_video_path, output_video_path, output_json_path, skip_fr
     print(
         f"Processing complete. Output video saved to {output_video_path}, JSON saved to {output_json_path}"
     )
-
-
-# Example usage (now with frame skipping):
-process_video("input1.mp4", "output1.mp4", "output1_detections.json", skip_frames=10)

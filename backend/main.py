@@ -40,7 +40,7 @@ def process_video_route():
         output_json_path = os.path.join(app.config['UPLOAD_FOLDER'], 'detections.json')
 
         # Process the video
-        process_video(input_video_path, output_video_path, output_json_path, skip_frames=2)
+        process_video(input_video_path, output_video_path, output_json_path, skip_frames=10)
 
         # Return JSON response with download URLs
         return jsonify({
