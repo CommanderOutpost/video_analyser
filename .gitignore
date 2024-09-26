@@ -3,3 +3,9 @@ backend/__pycache__*
 backend/yolo_files
 backend/backend_env
 *.json
+backend/face_recognition/database
+backend/face_recognition/face_embeddings
+backend/face_recognition/face_recon_env
+backend/face_recognition/faces
+backend/face_recognition/models
+backend/face_recognition/trials
