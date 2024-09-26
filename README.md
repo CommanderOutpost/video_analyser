@@ -40,15 +40,7 @@ cd ../..
 
 Create a python environment (recommended):
 ```
-python3 -m venv environment_name
-```
-
-Create a `requirements.txt` file in the `backend` directory if it doesn't exist, and add the following dependencies:
-
-```
-flask
-numpy
-opencv-python-headless
+python3 -m venv <environment-name>
 ```
 
 Run the following command to install the required Python packages:
