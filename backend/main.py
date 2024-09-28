@@ -5,7 +5,9 @@ from werkzeug.utils import secure_filename
 # Import your process_video function
 from detection import (
     process_video,
-)  # Make sure this imports correctly from your existing code
+) 
+
+from face_recognition.non_realtime_face_recognition import process_video_for_faces
 
 app = Flask(__name__)
 
@@ -41,11 +43,16 @@ def process_video_route():
 
         # Define output paths for the processed video and JSON
         output_video_path = os.path.join(app.config["UPLOAD_FOLDER"], "output.mp4")
+        output_faces_video_path = os.path.join(app.config["UPLOAD_FOLDER"], "output_faces.mp4")
         output_json_path = os.path.join(app.config["UPLOAD_FOLDER"], "detections.json")
 
         # Process the video
         process_video(
             input_video_path, output_video_path, output_json_path, skip_frames=10
+        )
+        
+        process_video_for_faces(
+            input_video_path, output_faces_video_path
         )
 
         # Return JSON response with download URLs
@@ -54,6 +61,7 @@ def process_video_route():
                 {
                     "message": "Video processed successfully",
                     "output_video_url": f"/download/output.mp4",
+                    "output_video_with_faces_url": f"/download/output_faces.mp4",
                     "output_json_url": f"/download/detections.json",
                 }
             ),
