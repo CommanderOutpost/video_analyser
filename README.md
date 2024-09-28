@@ -21,7 +21,7 @@ cd <repository-directory>
 
 ### Step 2: Download YOLO Models and Configuration Files
 
-Use `wget` to download the necessary YOLO configuration files and pre-trained models.
+Use `wget` to download the necessary configuration files and pre-trained models.
 
 ```bash
 mkdir -p backend/yolo_files
@@ -29,26 +29,23 @@ cd backend/yolo_files
 
 # Download YOLO configuration files and weights
 wget https://pjreddie.com/media/files/yolov3.weights
-wget https://pjreddie.com/media/files/yolov3.cfg
+wget https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolov3.cfg
+wget https://raw.githubusercontent.com/pjreddie/darknet/master/data/coco.names
 
-# Download COCO names
-wget https://pjreddie.com/media/files/coco.names
-cd ../..
+cd ../face_recognition
+mkdir models
+wget http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
+wget http://dlib.net/files/dlib_face_recognition_resnet_model_v1.dat.bz2
+bzip2 -d shape_predictor_68_face_landmarks.dat.bz2
+bzip2 -d dlib_face_recognition_resnet_model_v1.dat.bz2
+cd ..
 ```
 
 ### Step 3: Install Python Packages
 
 Create a python environment (recommended):
 ```
-python3 -m venv environment_name
-```
-
-Create a `requirements.txt` file in the `backend` directory if it doesn't exist, and add the following dependencies:
-
-```
-flask
-numpy
-opencv-python-headless
+python3 -m venv <environment-name>
 ```
 
 Run the following command to install the required Python packages:

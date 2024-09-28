@@ -56,4 +56,3 @@ def add_to_database():
     with open(database_file, "w") as f:
         json.dump(face_database, f, indent=4)
     print("Database updated and saved.")
-
