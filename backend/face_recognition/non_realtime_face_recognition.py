@@ -53,7 +53,7 @@ def recognize_face(embedding, database, threshold=0.5):
     return best_match, best_similarity
 
 
-def process_video_for_faces(input_video_path, output_video_path):
+def process_video_for_faces(input_video_path, output_video_path, output_json_path, skip_frames=2):
     # Open the input video
     cap = cv2.VideoCapture(input_video_path)
 
@@ -62,18 +62,31 @@ def process_video_for_faces(input_video_path, output_video_path):
     frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     fps = cap.get(cv2.CAP_PROP_FPS)
 
+    # Adjust the FPS for the output video
+    adjusted_fps = fps / skip_frames
+
     # Define the codec and create a VideoWriter object
     fourcc = cv2.VideoWriter_fourcc(*"mp4v")
-    out = cv2.VideoWriter(output_video_path, fourcc, fps, (frame_width, frame_height))
+    out = cv2.VideoWriter(output_video_path, fourcc, adjusted_fps, (frame_width, frame_height))
 
+    detection_data = []
+
+    frame_count = 0
     while cap.isOpened():
         ret, frame = cap.read()
         if not ret:
             break  # End of video
 
+        # Skip frames
+        if frame_count % skip_frames != 0:
+            frame_count += 1
+            continue
+
         # Convert the frame to grayscale for detection
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = detector(gray)
+
+        current_frame_detections = []
 
         for face in faces:
             x, y, w, h = (face.left(), face.top(), face.width(), face.height())
@@ -98,11 +111,33 @@ def process_video_for_faces(input_video_path, output_video_path):
                     2,
                 )
 
+                current_frame_detections.append(
+                    {
+                        "label": person,
+                        "confidence": float(confidence),
+                        "box": [int(x), int(y), int(w), int(h)],
+                        "time": frame_count / fps,  # Time in seconds
+                    }
+                )
+
+        # If any detections were made in the current frame, add them to the detection_data
+        if current_frame_detections:
+            detection_data.append(
+                {"frame": frame_count, "detections": current_frame_detections}
+            )
+
         # Write the frame to the output video
         out.write(frame)
+        frame_count += 1
 
     # Release video capture and writer objects
     cap.release()
     out.release()
 
-    print(f"Processing complete. Output video saved to {output_video_path}")
+    # Save detections to JSON
+    with open(output_json_path, "w") as f:
+        json.dump(detection_data, f, indent=4)
+
+    print(
+        f"Processing complete. Output video saved to {output_video_path}, JSON saved to {output_json_path}"
+    )
