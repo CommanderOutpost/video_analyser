@@ -63,6 +63,7 @@ def process_video_route():
                     "output_video_url": f"/download/output.mp4",
                     "output_video_with_faces_url": f"/download/output_faces.mp4",
                     "output_json_url": f"/download/detections.json",
+                    "output_faces_json_url": f"/download/detections_faces.json",
                 }
             ),
             200,
