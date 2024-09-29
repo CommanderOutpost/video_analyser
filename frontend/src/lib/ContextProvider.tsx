@@ -1,12 +1,13 @@
-import React, { createContext, useRef, useState, ReactNode } from "react";
-import { ContextProps, DetectedItem, VideoFile } from "./types";
+import React, { createContext, useRef, useState } from "react";
+import {
+  ContextProps,
+  ContextProviderProps,
+  DetectedItem,
+  VideoFile,
+} from "./types";
 
 // Create the context, specifying the type and allowing for undefined
 const MyContext = createContext<ContextProps | null>(null);
-
-interface ContextProviderProps {
-  children: ReactNode;
-}
 
 // Create the provider component
 const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
@@ -26,6 +27,8 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [showToast, setShowToast] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const states = {
     videos,
@@ -50,6 +53,10 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
     setIsFullscreen,
     videoRef,
     fileInputRef,
+    showToast,
+    setShowToast,
+    errorMessage,
+    setErrorMessage,
   };
 
   return <MyContext.Provider value={states}>{children}</MyContext.Provider>;

@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface VideoFile {
   file: File;
   url: string;
@@ -6,6 +8,10 @@ export interface VideoFile {
 export interface DetectedItem {
   name: string;
   timestamp: number;
+}
+
+export interface ContextProviderProps {
+  children: ReactNode;
 }
 
 export interface ContextProps {
@@ -31,4 +37,14 @@ export interface ContextProps {
   setIsFullscreen: React.Dispatch<React.SetStateAction<boolean>>;
   videoRef: React.RefObject<HTMLVideoElement>;
   fileInputRef: React.RefObject<HTMLInputElement>;
+  showToast: boolean;
+  setShowToast: React.Dispatch<React.SetStateAction<boolean>>;
+  errorMessage: string;
+  setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export interface ErrorToastProps {
+  message: string;
+  duration?: number;
+  onClose: () => void;
 }
