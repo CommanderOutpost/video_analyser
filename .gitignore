@@ -2,7 +2,6 @@ backend/static/
 backend/__pycache__*
 backend/yolo_files
 backend/backend_env
-*.json
 backend/face_recognition/database
 backend/face_recognition/face_embeddings
 backend/face_recognition/face_recon_env
@@ -35,6 +34,7 @@ coverage
 
 # Dependency directories
 node_modules/
+dist/*
 jspm_packages/
 
 # Optional npm cache directory
