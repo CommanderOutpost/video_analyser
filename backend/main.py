@@ -1,4 +1,5 @@
 from flask import Flask, request, send_file, jsonify
+from flask_cors import CORS
 import os
 import zipfile
 from werkzeug.utils import secure_filename
@@ -6,6 +7,9 @@ from detection import process_video
 from face_recognition.non_realtime_face_recognition import process_video_for_faces
 
 app = Flask(__name__)
+
+# Enable CORS
+CORS(app)
 
 # Set the upload folder
 UPLOAD_FOLDER = "static/"
