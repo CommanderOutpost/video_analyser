@@ -8,6 +8,9 @@ backend/face_recognition/face_recon_env
 backend/face_recognition/faces
 backend/face_recognition/models
 backend/face_recognition/trials
+<<<<<<< HEAD
+*mp4
+=======
 
 # Logs
 logs
@@ -78,3 +81,4 @@ yarn.lock
 
 # Windows system files
 Thumbs.db
+>>>>>>> 1cb33743152cba5314dbb34de72c41c626469f82

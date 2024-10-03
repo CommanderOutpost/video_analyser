@@ -5,3 +5,4 @@ opencv-python
 opencv-python-headless
 opencv-contrib-python
 pyinstaller
+flask-cors
