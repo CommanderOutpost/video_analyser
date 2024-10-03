@@ -31,8 +31,9 @@ coverage
 
 # Dependency directories
 node_modules/
-dist/*
+dist/
 jspm_packages/
+.vite/
 
 # Optional npm cache directory
 .npm
