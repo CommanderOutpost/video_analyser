@@ -16,6 +16,7 @@ import {
 import { Button } from "./ui/button";
 import { useContentProvider } from "../hooks/useContextProvider";
 import { useEffect } from "react";
+import { formatTime } from "../lib/function";
 
 export default function Modal() {
   const {
@@ -31,6 +32,8 @@ export default function Modal() {
     setIsPlaying,
     setCurrentVideoIndex,
     setIsFullscreen,
+    setErrorMessage,
+    setShowToast,
   } = useContentProvider();
 
   const handleCloseModal = () => {
@@ -48,6 +51,8 @@ export default function Modal() {
       } else {
         videoRef.current.play().catch((error) => {
           console.error("Error playing video:", error);
+          setErrorMessage(error.message);
+          setShowToast(true);
         });
       }
       setIsPlaying(!isPlaying);
@@ -60,6 +65,8 @@ export default function Modal() {
       if (!isPlaying) {
         videoRef.current.play().catch((error) => {
           console.error("Error playing video:", error);
+          setErrorMessage(error.message);
+          setShowToast(true);
         });
         setIsPlaying(true);
       }
@@ -161,7 +168,7 @@ export default function Modal() {
                       onClick={() => seekToTimestamp(item.timestamp)}
                       className="text-blue-400 hover:text-blue-300 border-blue-400 hover:border-blue-300"
                     >
-                      Go to {item.timestamp}s
+                      Go to {formatTime(item.timestamp)}
                     </Button>
                   </li>
                 ))}

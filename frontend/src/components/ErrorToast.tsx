@@ -23,8 +23,8 @@ export default function ErrorToast({
   return (
     <ToastProvider>
       <Toast open={open} onOpenChange={setOpen} className="bg-red-600">
-        <div className="flex items-start gap-2">
-          <AlertCircle className="h-5 w-5 text-white" />
+        <div className="grid grid-flow-col gap-4">
+          <AlertCircle className="h-6 w-6 text-white" />
           <div className="grid gap-1 text-white">
             <ToastTitle>Error</ToastTitle>
             <ToastDescription>{message}</ToastDescription>

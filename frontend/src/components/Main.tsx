@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { useContentProvider } from "../hooks/useContextProvider";
+import axios from "axios";
 
 export default function Main() {
   const {
@@ -17,6 +18,8 @@ export default function Main() {
     setVideos,
     setCurrentVideoIndex,
     setDetectedItems,
+    setErrorMessage,
+    setShowToast,
   } = useContentProvider();
 
   const handleRemoveVideo = (index: number) => {
@@ -28,35 +31,59 @@ export default function Main() {
     }
   };
 
+  const handleDeleteAllVideos = () => {
+    setVideos([]);
+    setSelectedVideoIndex(null);
+    setCurrentVideoIndex(null);
+  };
+
   const handleAnalyze = async () => {
     if (selectedVideoIndex === null) return;
-    // setIsAnalyzing(true);
-    // setCurrentVideoIndex(selectedVideoIndex);
-
-    // Simulating API call and analysis
-    // setTimeout(() => {
-    //   setDetectedItems([
-    //     { name: "Person", timestamp: 5 },
-    //     { name: "Car", timestamp: 15 },
-    //     { name: "Suspicious activity", timestamp: 25 },
-    //     { name: "Dining Table", timestamp: 60 },
-    //     { name: "Person", timestamp: 160 },
-    //   ]);
-    //   setIsAnalyzing(false);
-    //   setIsModalOpen(true);
-    // }, 3000);
     try {
       setIsAnalyzing(true);
       setCurrentVideoIndex(selectedVideoIndex);
+      const payload = new FormData();
+      const videoFile = videos[selectedVideoIndex];
+      payload.append("video", videoFile);
+      //   const response = await axios.post(
+      //     "http://127.0.0.1:5000/process_video",
+      //     payload,
+      //     {
+      //       headers: {
+      //         "Content-Type": "multipart/form-data",
+      //       },
+      //     },
+      //   );
+      //   console.log({ response });
+      setDetectedItems([
+        { name: "Person", timestamp: 5 },
+        { name: "Car", timestamp: 15 },
+        { name: "Suspicious activity", timestamp: 25 },
+        { name: "Dining Table", timestamp: 60 },
+        { name: "Person", timestamp: 160 },
+      ]);
+      setIsAnalyzing(false);
+      setIsModalOpen(true);
     } catch (error: any) {
-      console.error(error);
+      setErrorMessage(error.message);
+      setShowToast(true);
     }
   };
 
   return (
     <div className="flex-1 p-8 overflow-auto">
       <div className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">Uploaded Footage</h2>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-semibold">Uploaded Footage</h2>
+          <Button
+            onClick={handleDeleteAllVideos}
+            variant="destructive"
+            className="bg-red-500 hover:bg-red-600 text-white"
+            disabled={videos.length === 0}
+          >
+            Delete All Videos
+          </Button>
+        </div>
         {videos.length > 0 ? (
           <ul className="space-y-2">
             {videos.map((video, index) => (
