@@ -30,21 +30,27 @@ export default function Main() {
 
   const handleAnalyze = async () => {
     if (selectedVideoIndex === null) return;
-    setIsAnalyzing(true);
-    setCurrentVideoIndex(selectedVideoIndex);
+    // setIsAnalyzing(true);
+    // setCurrentVideoIndex(selectedVideoIndex);
 
     // Simulating API call and analysis
-    setTimeout(() => {
-      setDetectedItems([
-        { name: "Person", timestamp: 5 },
-        { name: "Car", timestamp: 15 },
-        { name: "Suspicious activity", timestamp: 25 },
-        { name: "Dining Table", timestamp: 60 },
-        { name: "Person", timestamp: 160 },
-      ]);
-      setIsAnalyzing(false);
-      setIsModalOpen(true);
-    }, 3000);
+    // setTimeout(() => {
+    //   setDetectedItems([
+    //     { name: "Person", timestamp: 5 },
+    //     { name: "Car", timestamp: 15 },
+    //     { name: "Suspicious activity", timestamp: 25 },
+    //     { name: "Dining Table", timestamp: 60 },
+    //     { name: "Person", timestamp: 160 },
+    //   ]);
+    //   setIsAnalyzing(false);
+    //   setIsModalOpen(true);
+    // }, 3000);
+    try {
+      setIsAnalyzing(true);
+      setCurrentVideoIndex(selectedVideoIndex);
+    } catch (error: any) {
+      console.error(error);
+    }
   };
 
   return (

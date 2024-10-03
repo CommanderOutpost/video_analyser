@@ -59,7 +59,6 @@ export default function Sidebar() {
 
   return (
     <div className="w-64 bg-gray-800 text-white p-4 flex flex-col">
-      {/* <h1 className="text-2xl font-bold mb-6">CCTV Analyzer</h1> */}
       <div
         className={`flex-1 p-4 border-2 border-dashed rounded-lg transition-colors ${
           isDragging ? "border-blue-500 bg-blue-900" : "border-gray-600"
