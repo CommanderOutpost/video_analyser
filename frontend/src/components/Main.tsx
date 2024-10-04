@@ -64,13 +64,13 @@ export default function Main() {
       const detections: DetectedItem[] = detectionsJson
         ? JSON.parse(detectionsJson)
         : [];
-      console.log(detections);
 
       // Extract output.mp4
       const outputVideo = await zipContents.file("output.mp4")?.async("blob");
       const processedVideoUrl = outputVideo
         ? URL.createObjectURL(outputVideo)
         : null;
+      console.log(processedVideoUrl?.split(':'))
 
       setVideos((prevVideos) => {
         const updatedVideos = [...prevVideos];
