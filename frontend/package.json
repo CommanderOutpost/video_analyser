@@ -11,26 +11,7 @@
     "preview": "vite preview",
     "format": "prettier --write \"**/*.{js,ts,tsx,jsx,scss,html,md,json}\" --ignore-path .gitignore",
     "electron-dev": "vite build && electron .",
-    "start": "concurrently \"npm run dev\" \"npm run electron-dev\"",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder"
-  },
-  "build": {
-    "appId": "com.videoanalyser.videoanalyser",
-    "files": [
-      "build/**/*",
-      "main.js",
-      "backend/**/*"
-    ],
-    "extraResources": [
-      {
-        "from": "backend/dist/",
-        "to": "backend",
-        "filter": [
-          "**/*"
-        ]
-      }
-    ]
+    "start": "concurrently \"npm run dev\" \"npm run electron-dev\""
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.1",
