@@ -27,7 +27,6 @@ export default function Modal() {
     videoRef,
     isPlaying,
     isAnalyzing,
-    detectedItems,
     setIsModalOpen,
     setIsPlaying,
     setCurrentVideoIndex,
@@ -154,25 +153,30 @@ export default function Modal() {
               <div className="flex items-center justify-center h-20">
                 <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-500"></div>
               </div>
-            ) : (
+            ) : currentVideoIndex !== null &&
+              videos[currentVideoIndex].detectedItems.length > 0 ? (
               <ul className="space-y-2">
-                {detectedItems.map((item, index) => (
-                  <li
-                    key={index}
-                    className="flex items-center justify-between bg-gray-700 p-2 rounded-md"
-                  >
-                    <span>{item.name}</span>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => seekToTimestamp(item.timestamp)}
-                      className="text-blue-400 hover:text-blue-300 border-blue-400 hover:border-blue-300"
+                {videos[currentVideoIndex].detectedItems.map((item, index) =>
+                  item.detections.map((detection, j) => (
+                    <li
+                      key={`${index}${j}`}
+                      className="flex items-center justify-between bg-gray-700 p-2 rounded-md"
                     >
-                      Go to {formatTime(item.timestamp)}
-                    </Button>
-                  </li>
-                ))}
+                      <span>{detection.label}</span>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => seekToTimestamp(detection.time)}
+                        className="text-blue-400 hover:text-blue-300 border-blue-400 hover:border-blue-300"
+                      >
+                        Go to {formatTime(detection.time)}
+                      </Button>
+                    </li>
+                  )),
+                )}
               </ul>
+            ) : (
+              <p>No items detected for this video.</p>
             )}
           </div>
         </div>

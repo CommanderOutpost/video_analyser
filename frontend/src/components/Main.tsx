@@ -4,6 +4,8 @@ import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { useContentProvider } from "../hooks/useContextProvider";
 import axios from "axios";
+import JSZip from "jszip";
+import { DetectedItem } from "../lib/types";
 
 export default function Main() {
   const {
@@ -17,7 +19,6 @@ export default function Main() {
     setIsAnalyzing,
     setVideos,
     setCurrentVideoIndex,
-    setDetectedItems,
     setErrorMessage,
     setShowToast,
   } = useContentProvider();
@@ -39,34 +40,54 @@ export default function Main() {
 
   const handleAnalyze = async () => {
     if (selectedVideoIndex === null) return;
+    setIsAnalyzing(true);
+    setCurrentVideoIndex(selectedVideoIndex);
     try {
-      setIsAnalyzing(true);
-      setCurrentVideoIndex(selectedVideoIndex);
-      const payload = new FormData();
-      const videoFile = videos[selectedVideoIndex];
-      payload.append("video", videoFile.file);
-      //   const response = await axios.post(
-      //     "http://127.0.0.1:5000/process_video",
-      //     payload,
-      //     {
-      //       headers: {
-      //         "Content-Type": "multipart/form-data",
-      //       },
-      //     },
-      //   );
-      //   console.log({ response });
-      setDetectedItems([
-        { name: "Person", timestamp: 5 },
-        { name: "Car", timestamp: 15 },
-        { name: "Suspicious activity", timestamp: 25 },
-        { name: "Dining Table", timestamp: 60 },
-        { name: "Person", timestamp: 160 },
-      ]);
+      const formData = new FormData();
+      formData.append("video", videos[selectedVideoIndex].file);
+      const response = await axios.post(
+        "http://127.0.0.1:5000/process_video",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          responseType: "blob",
+        },
+      );
+      const zip = new JSZip();
+      const zipContents = await zip.loadAsync(response.data);
+      // Extract detections.json
+      const detectionsJson = await zipContents
+        .file("detections.json")
+        ?.async("text");
+      const detections: DetectedItem[] = detectionsJson
+        ? JSON.parse(detectionsJson)
+        : [];
+      console.log(detections);
+
+      // Extract output.mp4
+      const outputVideo = await zipContents.file("output.mp4")?.async("blob");
+      const processedVideoUrl = outputVideo
+        ? URL.createObjectURL(outputVideo)
+        : null;
+
+      setVideos((prevVideos) => {
+        const updatedVideos = [...prevVideos];
+        updatedVideos[selectedVideoIndex] = {
+          ...updatedVideos[selectedVideoIndex],
+          detectedItems: detections,
+          url: processedVideoUrl,
+        };
+        return updatedVideos;
+      });
+
       setIsAnalyzing(false);
       setIsModalOpen(true);
     } catch (error: any) {
       setErrorMessage(error.message);
       setShowToast(true);
+      setIsAnalyzing(false);
     }
   };
 
@@ -130,7 +151,7 @@ export default function Main() {
       <Button
         onClick={handleAnalyze}
         // disabled={selectedVideoIndex === null || !prompt || isAnalyzing}
-        disabled={selectedVideoIndex === null}
+        disabled={selectedVideoIndex === null || isAnalyzing}
         className="w-full bg-green-600 hover:bg-green-700 text-white"
       >
         {isAnalyzing ? "Analyzing..." : "Analyze Footage"}

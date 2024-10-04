@@ -1,13 +1,19 @@
 import { ReactNode } from "react";
 
-export interface VideoFile {
-  file: File;
-  url: string;
+interface Detections {
+  label: string;
+  time: number;
 }
 
 export interface DetectedItem {
-  name: string;
-  timestamp: number;
+  frame: number;
+  detections: Detections[];
+}
+
+export interface VideoFile {
+  file: File;
+  url: string;
+  detectedItems: DetectedItem[];
 }
 
 export interface ContextProviderProps {
@@ -25,8 +31,6 @@ export interface ContextProps {
   setPrompt: React.Dispatch<React.SetStateAction<string>>;
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  detectedItems: DetectedItem[];
-  setDetectedItems: React.Dispatch<React.SetStateAction<DetectedItem[]>>;
   isAnalyzing: boolean;
   setIsAnalyzing: React.Dispatch<React.SetStateAction<boolean>>;
   isDragging: boolean;

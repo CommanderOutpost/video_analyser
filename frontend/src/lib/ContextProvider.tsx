@@ -20,7 +20,6 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
   );
   const [prompt, setPrompt] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [detectedItems, setDetectedItems] = useState<DetectedItem[]>([]);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -41,8 +40,6 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
     setPrompt,
     isModalOpen,
     setIsModalOpen,
-    detectedItems,
-    setDetectedItems,
     isAnalyzing,
     setIsAnalyzing,
     isDragging,

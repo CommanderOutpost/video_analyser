@@ -6,5 +6,5 @@ export function formatTime(seconds: number): string {
   const formattedSeconds =
     remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds;
 
-  return `${minutes}:${formattedSeconds}`;
+  return `${minutes}:${formattedSeconds.toString().split(".")[0]}`;
 }
