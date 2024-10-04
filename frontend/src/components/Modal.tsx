@@ -118,14 +118,14 @@ export default function Modal() {
               </video>
             )}
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center space-x-4">
-              <Button
+              {/* <Button
                 variant="secondary"
                 size="icon"
                 onClick={() => switchVideo("prev")}
                 className="bg-white/20 hover:bg-white/30 text-white"
               >
                 <ChevronLeftIcon className="h-6 w-6" />
-              </Button>
+              </Button> */}
               <Button
                 variant="secondary"
                 size="icon"
@@ -138,14 +138,14 @@ export default function Modal() {
                   <PlayIcon className="h-6 w-6" />
                 )}
               </Button>
-              <Button
+              {/* <Button
                 variant="secondary"
                 size="icon"
                 onClick={() => switchVideo("next")}
                 className="bg-white/20 hover:bg-white/30 text-white"
               >
                 <ChevronRightIcon className="h-6 w-6" />
-              </Button>
+              </Button> */}
             </div>
           </div>
           <div className="p-4 bg-gray-800 text-white border-t border-gray-700 overflow-y-auto max-h-[30vh]">
@@ -198,7 +198,7 @@ export default function Modal() {
             variant="ghost"
             size="icon"
             onClick={handleCloseModal}
-            className="text-white hover:bg-white/20"
+            className="text-white hover:bg-white/20 z-50"
           >
             <XIcon className="h-5 w-5" />
           </Button>

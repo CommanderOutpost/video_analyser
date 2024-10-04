@@ -74,8 +74,6 @@ export default function Main() {
         ? URL.createObjectURL(outputVideo)
         : null;
 
-      console.log("output type: ", outputVideo.size);
-
       setVideos((prevVideos) => {
         const updatedVideos = [...prevVideos];
         updatedVideos[selectedVideoIndex] = {
