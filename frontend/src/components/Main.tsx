@@ -66,11 +66,15 @@ export default function Main() {
         : [];
 
       // Extract output.mp4
-      const outputVideo = await zipContents.file("output.mp4")?.async("blob");
+      const outputVideo = await zipContents
+        .file("output.mp4")
+        ?.async("blob")
+        .then((blob) => new Blob([blob], { type: "video/mp4" }));
       const processedVideoUrl = outputVideo
         ? URL.createObjectURL(outputVideo)
         : null;
-      console.log(processedVideoUrl?.split(':'))
+
+      console.log("output type: ", outputVideo.size);
 
       setVideos((prevVideos) => {
         const updatedVideos = [...prevVideos];

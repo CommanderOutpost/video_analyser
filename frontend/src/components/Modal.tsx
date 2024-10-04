@@ -53,7 +53,7 @@ export default function Modal() {
           setErrorMessage(error.message);
           setShowToast(true);
         });
-        return
+        return;
       }
       setIsPlaying(!isPlaying);
     }
