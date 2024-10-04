@@ -1,16 +1,13 @@
-backend/static/
-backend/__pycache__*
-backend/yolo_files
-backend/backend_env
-backend/face_recognition/database
-backend/face_recognition/face_embeddings
-backend/face_recognition/face_recon_env
-backend/face_recognition/faces
-backend/face_recognition/models
-backend/face_recognition/trials
-<<<<<<< HEAD
-*mp4
-=======
+frontend/backend/static/
+frontend/backend/__pycache__*
+frontend/backend/yolo_files
+frontend/backend/backend_env
+frontend/backend/face_recognition/database
+frontend/backend/face_recognition/face_embeddings
+frontend/backend/face_recognition/face_recon_env
+frontend/backend/face_recognition/faces
+frontend/backend/face_recognition/models
+frontend/backend/face_recognition/trials
 
 # Logs
 logs
@@ -81,4 +78,3 @@ yarn.lock
 
 # Windows system files
 Thumbs.db
->>>>>>> 1cb33743152cba5314dbb34de72c41c626469f82
