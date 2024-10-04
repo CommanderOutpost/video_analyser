@@ -25,6 +25,10 @@ def allowed_file(filename):
 # API endpoint to process video and return the video + JSON as a ZIP file
 @app.route("/process_video", methods=["POST"])
 def process_video_route():
+    # Ensure the upload folder exists
+    if not os.path.exists(app.config["UPLOAD_FOLDER"]):
+        os.makedirs(app.config["UPLOAD_FOLDER"])
+
     # Check if a video file is in the request
     if "video" not in request.files:
         return jsonify({"error": "No video file in request"}), 400

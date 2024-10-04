@@ -44,7 +44,7 @@ export default function Main() {
       setCurrentVideoIndex(selectedVideoIndex);
       const payload = new FormData();
       const videoFile = videos[selectedVideoIndex];
-      payload.append("video", videoFile);
+      payload.append("video", videoFile.file);
       //   const response = await axios.post(
       //     "http://127.0.0.1:5000/process_video",
       //     payload,
@@ -113,7 +113,7 @@ export default function Main() {
         )}
       </div>
 
-      <div className="mb-6">
+      {/* <div className="mb-6">
         <Label htmlFor="prompt" className="text-lg font-medium block mb-2">
           Analysis Prompt
         </Label>
@@ -125,11 +125,12 @@ export default function Main() {
           rows={3}
           className="w-full resize-none border-gray-300 focus:border-blue-500 focus:ring-blue-500"
         />
-      </div>
+      </div> */}
 
       <Button
         onClick={handleAnalyze}
-        disabled={selectedVideoIndex === null || !prompt || isAnalyzing}
+        // disabled={selectedVideoIndex === null || !prompt || isAnalyzing}
+        disabled={selectedVideoIndex === null}
         className="w-full bg-green-600 hover:bg-green-700 text-white"
       >
         {isAnalyzing ? "Analyzing..." : "Analyze Footage"}
