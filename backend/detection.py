@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import json
 import os
+from utils import convert_to_h264
 
 # Load YOLO
 yolo_net = cv2.dnn.readNet("yolo_files/yolov3.weights", "yolo_files/yolov3.cfg")
@@ -119,6 +120,7 @@ def process_video(input_video_path, output_video_path, output_json_path, skip_fr
 
     cap.release()
     out.release()
+    convert_to_h264(output_video_path, output_video_path)
 
     # Save detections to JSON
     with open(output_json_path, "w") as f:

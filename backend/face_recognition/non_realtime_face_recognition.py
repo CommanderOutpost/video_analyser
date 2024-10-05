@@ -3,6 +3,7 @@ import dlib
 import numpy as np
 import json
 import os
+from utils import convert_to_h264
 
 # Base directory (assuming everything is under face_recognition)
 base_dir = "face_recognition"
@@ -133,6 +134,7 @@ def process_video_for_faces(input_video_path, output_video_path, output_json_pat
     # Release video capture and writer objects
     cap.release()
     out.release()
+    convert_to_h264(output_video_path, output_video_path)
 
     # Save detections to JSON
     with open(output_json_path, "w") as f:
