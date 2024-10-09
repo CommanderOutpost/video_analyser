@@ -1,19 +1,19 @@
 import { SearchIcon, TrashIcon } from "lucide-react";
 import { Button } from "./ui/button";
-import { Label } from "./ui/label";
-import { Textarea } from "./ui/textarea";
+// import { Label } from "./ui/label";
+// import { Textarea } from "./ui/textarea";
 import { useContentProvider } from "../hooks/useContextProvider";
 import axios from "axios";
 import JSZip from "jszip";
-import { DetectedItem } from "../lib/types";
+// import { DetectedItem } from "../lib/types";
 
 export default function Main() {
   const {
     videos,
     selectedVideoIndex,
     setSelectedVideoIndex,
-    prompt,
-    setPrompt,
+    // prompt,
+    // setPrompt,
     isAnalyzing,
     setIsModalOpen,
     setIsAnalyzing,
@@ -61,7 +61,7 @@ export default function Main() {
       const detectionsJson = await zipContents
         .file("detections.json")
         ?.async("text");
-      const detections: DetectedItem[] = detectionsJson
+      const detections = detectionsJson
         ? JSON.parse(detectionsJson)
         : [];
 

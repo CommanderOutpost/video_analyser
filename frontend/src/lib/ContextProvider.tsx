@@ -2,7 +2,6 @@ import React, { createContext, useRef, useState } from "react";
 import {
   ContextProps,
   ContextProviderProps,
-  DetectedItem,
   VideoFile,
 } from "./types";
 

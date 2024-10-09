@@ -26,6 +26,8 @@ function createWindow() {
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true,
       contextIsolation: false,
+      enableRemoteModule: false,
+      webSecurity: false,
     },
   });
 
@@ -34,7 +36,7 @@ function createWindow() {
     win.loadURL("http://localhost:5173/");
   } else {
     // In production, load the generated `index.html` from the `dist` folder
-    win.loadFile(path.join(__dirname, "../dist/index.html"));
+    win.loadURL("file://" + path.join(__dirname, "dist/index.html"));
   }
 }
 
