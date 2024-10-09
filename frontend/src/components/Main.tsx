@@ -61,9 +61,7 @@ export default function Main() {
       const detectionsJson = await zipContents
         .file("detections.json")
         ?.async("text");
-      const detections = detectionsJson
-        ? JSON.parse(detectionsJson)
-        : [];
+      const detections = detectionsJson ? JSON.parse(detectionsJson) : [];
 
       // Extract output.mp4
       const outputVideo = await zipContents

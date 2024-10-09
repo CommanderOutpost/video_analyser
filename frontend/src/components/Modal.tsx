@@ -155,9 +155,9 @@ export default function Modal() {
                 <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-500"></div>
               </div>
             ) : currentVideoIndex !== null &&
-              videos[currentVideoIndex].detectedItems.length > 0 ? (
+              videos[currentVideoIndex]?.detectedItems.length > 0 ? (
               <ul className="space-y-2">
-                {videos[currentVideoIndex].detectedItems.map((item, index) =>
+                {videos[currentVideoIndex]?.detectedItems.map((item, index) =>
                   item.detections.map((detection, j) => (
                     <li
                       key={`${index}${j}`}

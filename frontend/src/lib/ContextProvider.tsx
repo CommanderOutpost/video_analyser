@@ -1,9 +1,5 @@
 import React, { createContext, useRef, useState } from "react";
-import {
-  ContextProps,
-  ContextProviderProps,
-  VideoFile,
-} from "./types";
+import { ContextProps, ContextProviderProps, VideoFile } from "./types";
 
 // Create the context, specifying the type and allowing for undefined
 const MyContext = createContext<ContextProps | null>(null);
