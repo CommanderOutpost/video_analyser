@@ -8,6 +8,12 @@ backend/face_recognition/face_recon_env
 backend/face_recognition/faces
 backend/face_recognition/models
 backend/face_recognition/trials
+backend/build/
+backend/dist/
+backend/main.spec
+<<<<<<< HEAD
+*mp4
+=======
 
 # Logs
 logs
