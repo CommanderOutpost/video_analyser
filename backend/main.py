@@ -1,15 +1,31 @@
 from flask import Flask, request, send_file, jsonify
 from flask_cors import CORS
 import os
+import subprocess
 import zipfile
 from werkzeug.utils import secure_filename
 from detection import process_video
 from face_recognition.non_realtime_face_recognition import process_video_for_faces
 
+# Check if ffmpeg is installed, if not, run the install script
+def check_ffmpeg():
+    try:
+        subprocess.run(["ffmpeg", "-version"], check=True)
+        print("FFmpeg is already installed.")
+    except subprocess.CalledProcessError:
+        print("FFmpeg not found, installing...")
+        subprocess.run(["./install_ffmpeg.sh"], check=True)
+
+# Call the check_ffmpeg function at the start of the app
+check_ffmpeg()
+
 app = Flask(__name__)
 
-# Enable CORS
-CORS(app)
+# Get the frontend origin from the environment variable
+frontend_origin = os.getenv("FRONTEND_ORIGIN", "*")
+
+# Enable CORS for all routes, allowing requests from the specified frontend origin
+CORS(app, resources={r"/*": {"origins": frontend_origin}}, supports_credentials=True)
 
 # Set the upload folder
 UPLOAD_FOLDER = "static/"
