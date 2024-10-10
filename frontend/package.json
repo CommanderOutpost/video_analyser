@@ -18,7 +18,7 @@
     "format": "prettier --write \"**/*.{js,ts,tsx,jsx,scss,html,md,json}\" --ignore-path .gitignore",
     "electron-dev": "vite build && electron .",
     "backend": "cd ../backend && python3 main.py",
-    "start": "concurrently \"npm run backend\" \"npm run dev\" \"npm run electron-dev\""
+    "start": "concurrently \"npm run backend\" \"npm run electron-dev\""
   },
   "build": {
     "appId": "com.cctvanalyser.cctvanalyser",
