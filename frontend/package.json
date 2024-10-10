@@ -17,28 +17,50 @@
     "preview": "vite preview",
     "format": "prettier --write \"**/*.{js,ts,tsx,jsx,scss,html,md,json}\" --ignore-path .gitignore",
     "electron-dev": "vite build && electron .",
-    "backend": "cd ../backend && python3 main.py",
-    "start": "concurrently \"npm run backend\" \"npm run electron-dev\""
+    "backend": "cd backend && python3 main.py",
+    "start": "npm run electron-dev"
   },
   "build": {
     "appId": "com.cctvanalyser.cctvanalyser",
+    "productName": "Video Analyser",
+    "directories": {
+      "output": "dist"
+    },
     "files": [
       "dist/**/*",
       "main.js",
-      "preload.js"
+      "preload.js",
+      "backend_python/**/*"
     ],
-    "productName": "Video Analyser",
+    "extraResources": [
+      {
+        "from": "backend_python/",
+        "to": "backend_python"
+      }
+    ],
     "mac": {
-      "category": "public.app-category.video",
-      "icon": "build/icons/logo.icns"
+      "category": "public.app-category.utilities",
+      "icon": "build/icons/icon.icns",
+      "target": [
+        "dmg",
+        "zip"
+      ]
     },
     "win": {
-      "target": "nsis",
-      "icon": "build/icons/logo.ico"
+      "icon": "build/icons/icon.ico",
+      "target": [
+        "nsis",
+        "zip"
+      ]
     },
     "linux": {
       "category": "Utility",
-      "icon": "build/icons/logo.png"
+      "icon": "build/icons",
+      "target": [
+        "AppImage",
+        "deb",
+        "tar.gz"
+      ]
     }
   },
   "dependencies": {
