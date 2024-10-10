@@ -53,6 +53,7 @@ export default function Main() {
             "Content-Type": "multipart/form-data",
           },
           responseType: "blob",
+          withCredentials: true,
         },
       );
       const zip = new JSZip();
@@ -100,7 +101,7 @@ export default function Main() {
             onClick={handleDeleteAllVideos}
             variant="destructive"
             className="bg-red-500 hover:bg-red-600 text-white"
-            disabled={videos.length === 0}
+            disabled={videos.length === 0 || isAnalyzing}
           >
             Delete All Videos
           </Button>

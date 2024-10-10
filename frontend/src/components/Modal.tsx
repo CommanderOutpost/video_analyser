@@ -53,7 +53,6 @@ export default function Modal() {
           setErrorMessage(error.message);
           setShowToast(true);
         });
-        return;
       }
       setIsPlaying(!isPlaying);
     }
@@ -68,8 +67,9 @@ export default function Modal() {
           setErrorMessage(error.message);
           setShowToast(true);
         });
-        setIsPlaying(true);
       }
+      videoRef.current.pause();
+      setIsPlaying(false);
     }
   };
 

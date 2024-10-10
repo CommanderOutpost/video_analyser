@@ -21,10 +21,10 @@ check_ffmpeg()
 
 app = Flask(__name__)
 
-# Get the frontend origin from the environment variable
+# Get the frontend origin from the environment variable, default to "*" to allow all origins
 frontend_origin = os.getenv("FRONTEND_ORIGIN", "*")
 
-# Enable CORS for all routes, allowing requests from the specified frontend origin
+# Enable CORS for all routes, allowing requests from any origin
 CORS(app, resources={r"/*": {"origins": frontend_origin}}, supports_credentials=True)
 
 # Set the upload folder
