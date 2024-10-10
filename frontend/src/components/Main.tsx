@@ -73,15 +73,17 @@ export default function Main() {
         ? URL.createObjectURL(outputVideo)
         : null;
 
-      setVideos((prevVideos) => {
-        const updatedVideos = [...prevVideos];
-        updatedVideos[selectedVideoIndex] = {
-          ...updatedVideos[selectedVideoIndex],
-          detectedItems: detections,
-          url: processedVideoUrl,
-        };
-        return updatedVideos;
-      });
+      if (processedVideoUrl) {
+        setVideos((prevVideos) => {
+          const updatedVideos = [...prevVideos];
+          updatedVideos[selectedVideoIndex] = {
+            ...updatedVideos[selectedVideoIndex],
+            detectedItems: detections,
+            url: processedVideoUrl,
+          };
+          return updatedVideos;
+        });
+      }
 
       setIsAnalyzing(false);
       setIsModalOpen(true);

@@ -11,9 +11,7 @@ backend/face_recognition/trials
 backend/build/
 backend/dist/
 backend/main.spec
-<<<<<<< HEAD
 *mp4
-=======
 
 # Logs
 logs
@@ -40,6 +38,7 @@ node_modules/
 dist/
 jspm_packages/
 .vite/
+build/
 
 # Optional npm cache directory
 .npm

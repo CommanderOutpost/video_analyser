@@ -21,7 +21,9 @@ export default function Sidebar() {
         .map((file) => ({
           file,
           url: URL.createObjectURL(file),
+          detectedItems: [],
         }));
+
       setVideos((prevVideos) => {
         const updatedVideos = [...prevVideos, ...newVideos];
         if (selectedVideoIndex === null && updatedVideos.length > 0) {

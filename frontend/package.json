@@ -2,16 +2,44 @@
   "name": "frontend",
   "private": true,
   "version": "0.0.0",
+  "author": [
+    "Festus-Olaleye Oluwafisayomi Oluwaseunfunmi",
+    "Salami Rasheed Amiola"
+  ],
+  "description": "An app that analyses Video Footage and detects the objects",
   "type": "module",
   "main": "main.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "electron:build": "electron-builder",
     "lint": "eslint .",
     "preview": "vite preview",
     "format": "prettier --write \"**/*.{js,ts,tsx,jsx,scss,html,md,json}\" --ignore-path .gitignore",
     "electron-dev": "vite build && electron .",
-    "start": "concurrently \"npm run dev\" \"npm run electron-dev\""
+    "backend": "cd ../backend && python3 main.py",
+    "start": "concurrently \"npm run backend\" \"npm run dev\" \"npm run electron-dev\""
+  },
+  "build": {
+    "appId": "com.cctvanalyser.cctvanalyser",
+    "files": [
+      "dist/**/*",
+      "main.js",
+      "preload.js"
+    ],
+    "productName": "Video Analyser",
+    "mac": {
+      "category": "public.app-category.video",
+      "icon": "build/icons/logo.icns"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icons/logo.ico"
+    },
+    "linux": {
+      "category": "Utility",
+      "icon": "build/icons/logo.png"
+    }
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.1",

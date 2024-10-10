@@ -13,7 +13,7 @@ export interface DetectedItem {
 export interface VideoFile {
   file: File;
   url: string;
-  detectedItems: DetectedItem[] | null;
+  detectedItems: DetectedItem[];
 }
 
 export interface ContextProviderProps {

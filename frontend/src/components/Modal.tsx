@@ -1,6 +1,6 @@
 import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
+  //   ChevronLeftIcon,
+  //   ChevronRightIcon,
   Maximize2Icon,
   Minimize2Icon,
   PauseIcon,
@@ -29,7 +29,7 @@ export default function Modal() {
     isAnalyzing,
     setIsModalOpen,
     setIsPlaying,
-    setCurrentVideoIndex,
+    // setCurrentVideoIndex,
     setIsFullscreen,
     setErrorMessage,
     setShowToast,
@@ -60,31 +60,29 @@ export default function Modal() {
 
   const seekToTimestamp = (timestamp: number) => {
     if (videoRef.current) {
+      // Seek to the specified timestamp
       videoRef.current.currentTime = timestamp;
-      if (!isPlaying) {
-        videoRef.current.play().catch((error) => {
-          console.error("Error playing video:", error);
-          setErrorMessage(error.message);
-          setShowToast(true);
-        });
-      }
+
+      // Pause the video (if playing)
       videoRef.current.pause();
+
+      // Set the playing state to false
       setIsPlaying(false);
     }
   };
 
-  const switchVideo = (direction: "prev" | "next") => {
-    if (currentVideoIndex === null) return;
-    let newIndex: number;
-    if (direction === "prev") {
-      newIndex =
-        currentVideoIndex > 0 ? currentVideoIndex - 1 : videos.length - 1;
-    } else {
-      newIndex =
-        currentVideoIndex < videos.length - 1 ? currentVideoIndex + 1 : 0;
-    }
-    setCurrentVideoIndex(newIndex);
-  };
+  //   const switchVideo = (direction: "prev" | "next") => {
+  //     if (currentVideoIndex === null) return;
+  //     let newIndex: number;
+  //     if (direction === "prev") {
+  //       newIndex =
+  //         currentVideoIndex > 0 ? currentVideoIndex - 1 : videos.length - 1;
+  //     } else {
+  //       newIndex =
+  //         currentVideoIndex < videos.length - 1 ? currentVideoIndex + 1 : 0;
+  //     }
+  //     setCurrentVideoIndex(newIndex);
+  //   };
 
   const toggleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
@@ -155,9 +153,9 @@ export default function Modal() {
                 <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-500"></div>
               </div>
             ) : currentVideoIndex !== null &&
-              videos[currentVideoIndex]?.detectedItems.length > 0 ? (
+              videos[currentVideoIndex].detectedItems.length > 0 ? (
               <ul className="space-y-2">
-                {videos[currentVideoIndex]?.detectedItems.map((item, index) =>
+                {videos[currentVideoIndex].detectedItems.map((item, index) =>
                   item.detections.map((detection, j) => (
                     <li
                       key={`${index}${j}`}
