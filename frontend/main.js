@@ -27,12 +27,17 @@ function createWindow() {
   });
 
   mainWindow.loadFile(path.join(__dirname, "dist/index.html"));
+
   const scriptPath = isDev
     ? path.join(__dirname, "backend_python/dist/main") // Development path
     : path.join(process.resourcesPath, "backend_python/dist/main");
 
+  const cwdPath = isDev
+    ? path.join(__dirname, "backend_python") // Development path
+    : path.join(process.resourcesPath, "backend_python"); // Packaged path
+
   pythonProcess = spawn(scriptPath, {
-    cwd: path.join(__dirname, "backend_python"),
+    cwd: cwdPath,
   });
 
   pythonProcess.stdout.on("data", (data) => {

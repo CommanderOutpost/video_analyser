@@ -2,21 +2,25 @@
   "name": "frontend",
   "private": true,
   "version": "0.0.0",
-  "author": [
-    "Festus-Olaleye Oluwafisayomi Oluwaseunfunmi",
-    "Salami Rasheed Amiola"
-  ],
+  "author": {
+    "name": [
+        "Festus-Olaleye Oluwafisayomi Oluwaseunfunmi",
+        "Salami Rasheed Amiola"
+      ],
+      "email": "festusolaleyef@gmail.com"
+  },
   "description": "An app that analyses Video Footage and detects the objects",
   "type": "module",
   "main": "main.js",
+  "homepage": "https://github.com/CommanderOutpost/video_analyser",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "format": "prettier --write \"**/*.{js,ts,tsx,jsx,scss,html,md,json}\" --ignore-path .gitignore",
-    "electron:build": "vite build && electron-builder -- --win --linux",
-    "backend": "cd backend_python && python3 main.py",
+    "electron:build": "vite build && electron-builder -- --win",
+    "backend": "cd backend_python && python main.py",
     "test:web": "concurrently \"npm run dev\" \"npm run backend\"",
     "start": "vite build && electron ."
   },
@@ -34,7 +38,7 @@
     ],
     "extraResources": [
       {
-        "from": "backend_python/dist/main",
+        "from": "backend_python",
         "to": "backend_python"
       }
     ],
