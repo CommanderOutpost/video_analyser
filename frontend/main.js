@@ -3,6 +3,7 @@ import * as path from "path";
 import { fileURLToPath } from "url";
 import { spawn } from "child_process";
 
+const isDev = !app.isPackaged;
 let mainWindow;
 let pythonProcess;
 // // Manually define __dirname in ESM
@@ -26,8 +27,11 @@ function createWindow() {
   });
 
   mainWindow.loadFile(path.join(__dirname, "dist/index.html"));
-  const scriptPath = path.join(__dirname, "backend_python", "main.py");
-  pythonProcess = spawn("python3", [`${scriptPath}`], {
+  const scriptPath = isDev
+    ? path.join(__dirname, "backend_python/dist/main") // Development path
+    : path.join(process.resourcesPath, "backend_python/dist/main");
+
+  pythonProcess = spawn(scriptPath, {
     cwd: path.join(__dirname, "backend_python"),
   });
 

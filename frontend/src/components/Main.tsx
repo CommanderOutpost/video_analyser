@@ -83,10 +83,9 @@ export default function Main() {
           };
           return updatedVideos;
         });
+        setIsModalOpen(true);
       }
-
       setIsAnalyzing(false);
-      setIsModalOpen(true);
     } catch (error: any) {
       setErrorMessage(error.message);
       setShowToast(true);
