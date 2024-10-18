@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "author": {
     "name": [
-        "Festus-Olaleye Oluwafisayomi Oluwaseunfunmi",
-        "Salami Rasheed Amiola"
-      ],
-      "email": "festusolaleyef@gmail.com"
+      "Festus-Olaleye Oluwafisayomi Oluwaseunfunmi",
+      "Salami Rasheed Amiola"
+    ],
+    "email": "festusolaleyef@gmail.com"
   },
   "description": "An app that analyses Video Footage and detects the objects",
   "type": "module",
@@ -34,12 +34,12 @@
       "dist/**/*",
       "main.js",
       "preload.js",
-      "backend_python/**/*"
+      "../backend**/*"
     ],
     "extraResources": [
       {
-        "from": "backend_python",
-        "to": "backend_python"
+        "from": "../backend",
+        "to": "backend"
       }
     ],
     "mac": {

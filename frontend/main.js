@@ -9,6 +9,7 @@ let pythonProcess;
 // // Manually define __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const __parentName = path.resolve(__dirname, "..");
 
 function createWindow() {
   const preloadPath = path.resolve(__dirname, "preload.js");
@@ -29,12 +30,12 @@ function createWindow() {
   mainWindow.loadFile(path.join(__dirname, "dist/index.html"));
 
   const scriptPath = isDev
-    ? path.join(__dirname, "backend_python/dist/main") // Development path
-    : path.join(process.resourcesPath, "backend_python/dist/main");
+    ? path.join(__parentName, "backend/dist/main") // Development path
+    : path.join(process.resourcesPath, "backend/dist/main");
 
   const cwdPath = isDev
-    ? path.join(__dirname, "backend_python") // Development path
-    : path.join(process.resourcesPath, "backend_python"); // Packaged path
+    ? path.join(__parentName, "backend") // Development path
+    : path.join(process.resourcesPath, "backend"); // Packaged path
 
   pythonProcess = spawn(scriptPath, {
     cwd: cwdPath,

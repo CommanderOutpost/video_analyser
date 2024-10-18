@@ -11,6 +11,20 @@ frontend/backend_python/face_recognition/trials
 frontend/backend_python/build/
 frontend/backend_python/dist/
 frontend/backend_python/main.spec
+
+backend/static/
+backend/__pycache__*
+backend/yolo_files/
+backend/backend_env/
+backend/face_recognition/database
+backend/face_recognition/face_embeddings
+backend/face_recognition/face_recon_env
+backend/face_recognition/faces
+backend/face_recognition/models
+backend/face_recognition/trials
+backend/build/
+backend/dist/
+backend/main.spec
 *mp4
 
 # Logs
