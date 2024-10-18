@@ -1,17 +1,3 @@
-frontend/backend_python/static/
-frontend/backend_python/__pycache__*
-frontend/backend_python/yolo_files/
-frontend/backend_python/backend_env/
-frontend/backend_python/face_recognition/database
-frontend/backend_python/face_recognition/face_embeddings
-frontend/backend_python/face_recognition/face_recon_env
-frontend/backend_python/face_recognition/faces
-frontend/backend_python/face_recognition/models
-frontend/backend_python/face_recognition/trials
-frontend/backend_python/build/
-frontend/backend_python/dist/
-frontend/backend_python/main.spec
-
 backend/static/
 backend/__pycache__*
 backend/yolo_files/
