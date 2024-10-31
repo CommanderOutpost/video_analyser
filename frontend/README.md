@@ -15,7 +15,6 @@ CCTV Footage Analyzer is a web and desktop application designed to analyze CCTV 
 Navigate to the frontend folder and install the required dependencies:
 
 ```bash
-cd frontend
 npm install
 ```
 
