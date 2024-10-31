@@ -19,10 +19,10 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "format": "prettier --write \"**/*.{js,ts,tsx,jsx,scss,html,md,json}\" --ignore-path .gitignore",
-    "electron:build": "vite build && electron-builder -- --win",
-    "backend": "cd backend_python && python main.py",
-    "test:web": "concurrently \"npm run dev\" \"npm run backend\"",
-    "start": "vite build && electron ."
+    "electron:build": "vite build && electron-builder -- --win", /* Builds the desktop app */
+    "backend": "cd ../backend && python main.py", /*runs the python backend*/
+    "test:web": "concurrently \"npm run dev\" \"npm run backend\"", /*run the backend server and the frontend concurrently*/
+    "start": "vite build && electron ." /*Starts the desktop app in a developer environment*/
   },
   "build": {
     "appId": "com.cctvanalyser.cctvanalyser",

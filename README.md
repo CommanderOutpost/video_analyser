@@ -1,71 +1,81 @@
+## Complete Setup Guide for CCTV Footage Analyzer
 
-# YOLO Object Detection Setup Guide
+### Prerequisites
 
-This guide will help you set up a YOLO object detection system using Python and Flask. Follow the instructions below to download necessary files, install packages, and set up your environment.
+Ensure the following are installed on your system:
+1. **Python 3.7 or higher**
+2. **Node.js v14 or higher** (includes npm)
+3. **Git** (to clone repositories)
+4. **wget and bzip2** (Windows-specific setup included below)
 
-## Prerequisites
+#### Installing `wget` and `bzip2` on Windows
+   - Option 1: **Install Git Bash** (recommended)
+     - Download **[Git for Windows](https://gitforwindows.org/)**, which includes `wget` and `bzip2`.
+     - Open Git Bash after installation to use `wget` and `bzip2` commands.
 
-- Python 3.7 or higher
-- pip (Python package installer)
+### Installation Steps
 
-## Installation
+1. **Clone the Repository**
+   ```bash
+   git clone <repository-url>
+   cd <repository-directory>
+   ```
 
-### Step 1: Clone the Repository
+2. **Backend Setup (Python)**
+   - Navigate to the backend folder:
+     ```bash
+     cd backend
+     ```
+   - Download necessary files with `wget` and `bzip2`:
+     ```bash
+     mkdir -p yolo_files
+     cd yolo_files
 
-Clone the repository to your local machine where you intend to run the detection system.
+     # Download YOLO configuration files and weights
+     wget https://pjreddie.com/media/files/yolov3.weights
+     wget https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolov3.cfg
+     wget https://raw.githubusercontent.com/pjreddie/darknet/master/data/coco.names
 
-```bash
-git clone <repository-url>
-cd <repository-directory>
-```
+     cd ../face_recognition
+     mkdir models
+     cd models
+     wget http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
+     wget http://dlib.net/files/dlib_face_recognition_resnet_model_v1.dat.bz2
+     bzip2 -d shape_predictor_68_face_landmarks.dat.bz2
+     bzip2 -d dlib_face_recognition_resnet_model_v1.dat.bz2
+     cd ..
+     ```
+   - Create and activate a virtual environment:
+     ```bash
+     python -m venv env
+     source env/bin/activate      # For Linux/macOS
+     env\Scripts\activate         # For Windows
+     ```
+   - Install the required Python packages:
+     ```bash
+     pip install -r requirements.txt
+     ```
 
-### Step 2: Download YOLO Models and Configuration Files
+3. **Frontend Setup (Node.js and Electron)**
+   - Navigate to the frontend folder:
+     ```bash
+     cd ../frontend
+     ```
+   - Install Node dependencies:
+     ```bash
+     npm install
+     ```
 
-Use `wget` to download the necessary configuration files and pre-trained models.
-
-```bash
-mkdir -p backend/yolo_files
-cd backend/yolo_files
-
-# Download YOLO configuration files and weights
-wget https://pjreddie.com/media/files/yolov3.weights
-wget https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolov3.cfg
-wget https://raw.githubusercontent.com/pjreddie/darknet/master/data/coco.names
-
-cd ../face_recognition
-mkdir models
-wget http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
-wget http://dlib.net/files/dlib_face_recognition_resnet_model_v1.dat.bz2
-bzip2 -d shape_predictor_68_face_landmarks.dat.bz2
-bzip2 -d dlib_face_recognition_resnet_model_v1.dat.bz2
-cd ..
-```
-
-### Step 3: Install Python Packages
-
-Create a python environment (recommended):
-```
-python3 -m venv <environment-name>
-```
-
-Run the following command to install the required Python packages:
-
-```bash
-pip install -r backend/requirements.txt
-```
-
-## Running the Application
-
-Navigate to the `backend` directory and start the Flask application:
-
-```bash
-cd backend
-python main.py
-```
-
-The Flask server will start running.
-
-## API Usage
-
-- **POST /process_video**: Upload a video file to be processed.
-- **GET /download/<filename>**: Download a processed video or JSON detections.
+4. **Run the Application**
+   - **Start Frontend and Backend for Web Testing**:
+     ```bash
+     npm run test:web
+     ```
+   - **Run as Desktop App (Electron)**:
+     ```bash
+     npm start
+     ```
+   - **Build Desktop App for Distribution**:
+     ```bash
+     npm run electron:build
+     ```
